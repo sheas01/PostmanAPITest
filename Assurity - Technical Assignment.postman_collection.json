@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "e16b4591-76d7-4cec-82a7-2be8e7b33ccb",
+		"name": "Assurity - Technical Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Assurity - Tech Assignment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"if (responseCode.code == 200) {\r",
+							"\r",
+							"    tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+							"        if (jsonData.Name == 'Carbon credits') {\r",
+							"            tests[\"Name is set to: \" + jsonData.Name] = true;\r",
+							"        }\r",
+							"        else {\r",
+							"            tests[\"Unexpected Name value:\"+ jsonData.Name] = true;\r",
+							"         }\r",
+							"    tests[\"CanRelist \" + jsonData.CanRelist] =  true;\r",
+							"    console.log(pm.test('Promotion list has Gallery', () => {\r",
+							"        let promotion = pm.response.json().Promotions.find (a => a.Name == 'Gallery');\r",
+							"        pm.expect(promotion.Description).to.includes(\"2x larger image\")\r",
+							"    }))\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tmsandbox.co.nz/v1/Categories/6327/Details.json?catalogue=false",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tmsandbox",
+						"co",
+						"nz"
+					],
+					"path": [
+						"v1",
+						"Categories",
+						"6327",
+						"Details.json"
+					],
+					"query": [
+						{
+							"key": "catalogue",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
